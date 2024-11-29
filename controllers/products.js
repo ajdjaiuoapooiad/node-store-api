@@ -1,6 +1,11 @@
-const getAllstatic = (req,res) => {
-    throw new Error('testing async error')
-    res.status(200).json({msg: 'product static'})
+const Product = require('../models/product')
+
+
+const getAllstatic = async (req,res) => {
+    const products = await Product.find({
+        name:'vase table'
+    })
+    res.status(200).json({products,nbHits: products.length})
 }
 
 
