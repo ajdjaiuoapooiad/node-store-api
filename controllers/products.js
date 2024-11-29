@@ -5,8 +5,7 @@ const getAllstatic = async (req,res) => {
     const products = await Product.find({})
         .sort('name price')
         .select('name price')
-        .limit(10)
-        .skip(5)
+ 
     res.status(200).json({products,nbHits: products.length})
 }
 
@@ -37,6 +36,12 @@ const getAllProducts = async (req,res) => {
         const fieldsList = fields.split(',').join(' ');
         result = result.select(fieldsList)
     }
+
+    const page = Number(req.query.page) || 1
+    const limit = Number(req.query.limit) || 10
+    const skip = (page - 1) * limit 
+
+    result = result.skip(skip).limit(limit)
 
 
 
