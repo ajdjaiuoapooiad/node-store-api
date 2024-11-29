@@ -10,11 +10,14 @@ const getAllstatic = async (req,res) => {
 
 
 const getAllProducts = async (req,res) => {
-    const {featured} = req.query
+    const {featured,company} = req.query
     const queryObjects = {}
 
     if(featured){
         queryObjects.featured = featured === 'true'? true: false
+    }
+    if(company){
+        queryObjects.company = company 
     }
 
     console.log(queryObjects);
